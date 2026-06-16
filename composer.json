@@ -1,18 +1,21 @@
 {
-    "name": "andreasburg/symfony-cap-bundle",
-    "description": "Keep them bots out.",
-    "type": "symfony-bundle",
-    "license": "mit",
-    "autoload": {
-        "psr-4": {
-            "Andreasburg\\SymfonyCapBundle\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Andreas Burg",
-            "email": "abu@andreasburg.net"
-        }
-    ],
-    "require": {}
+  "name": "andreasburg/symfony-cap-bundle",
+  "description": "Keep them bots out.",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Andreasburg\\SymfonyCapBundle\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Andreas Burg",
+      "email": "abu@andreasburg.net"
+    }
+  ],
+  "require": {
+    "php": ">=8.4",
+    "symfony/framework-bundle": "8.1.*"
+  }
 }
