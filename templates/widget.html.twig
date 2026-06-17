@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div data-controller="cap" data-action="solve->cap#solved">
+    <script>
+        window.CAP_CUSTOM_WASM_URL = 'https://cap.vocugi.han-solo.net/assets/cap_wasm_bg.wasm';
+        window.CAP_LANG = 'de';
+    </script>
+
+    <script src="https://cap.vocugi.han-solo.net/assets/widget.js"></script>
+
+    <cap-widget data-cap-api-endpoint="https://cap.vocugi.han-solo.net/{{ siteKey }}/"></cap-widget>
+</div>
+
+{% endblock %}
