@@ -59,5 +59,13 @@ class CapBundle extends AbstractBundle
         ],
       ]);
     }
+
+    $container->prependExtensionConfig('framework', [
+      'asset_mapper' => [
+        'paths' => [
+          __DIR__.'/../../assets/src' => '@aburg/cap-bundle',
+        ],
+      ],
+    ]);
   }
 }
