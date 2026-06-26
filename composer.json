@@ -18,6 +18,8 @@
     "php": ">=8.4",
     "symfony/framework-bundle": "8.1.*",
     "symfony/http-client": "8.1.*",
+    "symfony/stimulus-bundle": "^3.1",
+    "symfony/ux-turbo": "^3.1",
     "twig/twig": "^2.12|^3.0"
   }
 }
