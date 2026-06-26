@@ -17,6 +17,11 @@ class KernelListener
   public function __construct(
     private readonly HttpClientInterface $client,
     private readonly Environment $twig,
+    private readonly string $host,
+    private readonly string $siteKey,
+    private readonly string $siteSecret,
+    private readonly string $widgetUrl,
+    private readonly string $wasmUrl,
   ) {
     //
   }
@@ -30,11 +35,17 @@ class KernelListener
 
     if ($e->attribute instanceof Cap) {
       if ($e->kernelEvent instanceof ControllerArgumentsEvent) {
+        $siteKey = $e->attribute->getSiteKey() ?? $this->siteKey;
+        $siteSecret = $e->attribute->getSiteSecret() ?? $this->siteSecret;
         $token = $e->kernelEvent->getRequest()->query->get('token', null);
-        if (!$token || !$this->verifyToken($token, $e->attribute->getSiteKey(), $e->attribute->getSiteSecret())) {
-          $siteKey = $e->attribute->getSiteKey();
+        if (!$token || !$this->verifyToken($token, $siteKey, $siteSecret)) {
           $e->kernelEvent->setController(function () use ($siteKey) {
-            return new Response($this->twig->render('@CapBundle/widget.html.twig', ['siteKey' => $siteKey]));
+            return new Response($this->twig->render('@CapBundle/widget.html.twig', [
+              'host' => $this->host,
+              'widgetUrl' => $this->widgetUrl,
+              'wasmUrl' => $this->wasmUrl,
+              'siteKey' => $siteKey,
+            ]));
           });
         }
       }

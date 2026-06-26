@@ -1,0 +1,8 @@
+{
+  "controllers": {
+    "cap-controller": {
+      "main": "assets/src/controller.js",
+      "enabled": true
+    }
+  }
+}
