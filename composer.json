@@ -1,6 +1,6 @@
 {
-  "name": "andreas-burg/cap-bundle",
-  "description": "Keep them bots out.",
+  "name": "aburg/cap-bundle",
+  "description": "Protect your symfony project with a free and open captcha solution.",
   "type": "symfony-bundle",
   "license": "MIT",
   "autoload": {
