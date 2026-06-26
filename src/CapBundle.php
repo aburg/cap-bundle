@@ -16,10 +16,10 @@ class CapBundle extends AbstractBundle
     $definition->rootNode()
       ->children()
       ->scalarNode('host')->defaultValue('https://your.cap.instance.site/')->end()
-      ->scalarNode('site_key')->end()
-      ->scalarNode('site_secret')->end()
-      ->scalarNode('widget_url')->end()
-      ->scalarNode('wasm_url')->end()
+      ->scalarNode('site_key')->defaultValue('1234567890')->end()
+      ->scalarNode('site_secret')->defaultValue('this-is-not-your-secret')->end()
+      ->scalarNode('widget_url')->defaultValue('')->end()
+      ->scalarNode('wasm_url')->defaultValue('')->end()
       ->end()
     ;
   }
@@ -36,8 +36,8 @@ class CapBundle extends AbstractBundle
       ->exclude('../src/{DependencyInjection,Entity,CapBundle.php}');
 
     $host = $config['host'];
-    $widgetUrl = $config['widget_url'] ?? $host.'/assets/widget.js';
-    $wasmUrl = $config['wasm_url'] ?? $host.'/assets/cap_wasm_bg.wasm';
+    $widgetUrl = $config['widget_url'] ?: $host.'/assets/widget.js';
+    $wasmUrl = $config['wasm_url'] ?: $host.'/assets/cap_wasm_bg.wasm';
 
     $services->get(KernelListener::class)
       ->arg('$host', $host)
