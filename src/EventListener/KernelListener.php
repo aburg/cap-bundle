@@ -4,6 +4,7 @@ namespace AndreasBurg\CapBundle\EventListener;
 
 use AndreasBurg\CapBundle\Attribute\Cap;
 use Exception;
+use RuntimeException;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
@@ -36,7 +37,15 @@ class KernelListener
     if ($e->attribute instanceof Cap) {
       if ($e->kernelEvent instanceof ControllerArgumentsEvent) {
         $siteKey = $e->attribute->getSiteKey() ?? $this->siteKey;
+        if (!$siteKey) {
+          throw new RuntimeException('The site key is not configured!');
+        }
+
         $siteSecret = $e->attribute->getSiteSecret() ?? $this->siteSecret;
+        if (!$siteSecret) {
+          throw new RuntimeException('The site secret is not configured!');
+        }
+
         $token = $e->kernelEvent->getRequest()->query->get('token', null);
         if (!$token || !$this->verifyToken($token, $siteKey, $siteSecret)) {
           $e->kernelEvent->setController(function () use ($siteKey) {
